@@ -16,3 +16,8 @@ zbx-scripts/.idea/encodings.xml
 zbx-scripts/.idea/.name
 
 *.tmproj
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
