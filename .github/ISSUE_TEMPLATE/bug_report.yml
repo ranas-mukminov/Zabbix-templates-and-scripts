@@ -1,0 +1,129 @@
+name: Bug Report
+description: Report a bug in a template or script
+title: "[BUG] "
+labels: ["bug"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the form below to help us understand and fix the issue.
+
+  - type: input
+    id: template-script
+    attributes:
+      label: Template or Script Name
+      description: Which template or script is affected?
+      placeholder: "e.g., zbx-cisco-bgp4, zbx-windows-mssql, if.speed script"
+    validations:
+      required: true
+
+  - type: input
+    id: zabbix-version
+    attributes:
+      label: Zabbix Version
+      description: What version of Zabbix are you using?
+      placeholder: "e.g., 6.4.10, 7.0.0"
+    validations:
+      required: true
+
+  - type: input
+    id: device-os
+    attributes:
+      label: Device/OS/Vendor
+      description: What device, OS, or vendor are you monitoring?
+      placeholder: "e.g., Cisco IOS 15.2, Windows Server 2019, Fortinet FortiGate 7.0"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear description of what the bug is
+      placeholder: "Template fails to discover BGP neighbors on Cisco routers..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this bug?
+      placeholder: |
+        1. Import template zbx-cisco-bgp4.xml
+        2. Link to Cisco router running IOS 15.2
+        3. Set macro {$SNMP_COMMUNITY} = "public"
+        4. Wait for discovery...
+        5. No items are discovered
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+      placeholder: "Template should discover all BGP neighbors and create items for each..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+      placeholder: "Discovery rule shows 0 discovered items. Zabbix server log shows SNMP timeout errors..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / Error Messages
+      description: Any relevant log excerpts or error messages
+      placeholder: |
+        Zabbix server log:
+        2024-11-17 10:30:45.123 SNMP item [router01:bgp.neighbor.discovery] error: Timeout while connecting to [192.168.1.1]:161
+
+        snmpwalk output:
+        Timeout: No Response from 192.168.1.1
+      render: text
+
+  - type: textarea
+    id: config
+    attributes:
+      label: Configuration Details
+      description: Relevant configuration (macros, SNMP settings, etc.)
+      placeholder: |
+        Macros:
+        {$SNMP_COMMUNITY} = "public"
+        {$SNMP_VERSION} = "2"
+        
+        SNMP config on device:
+        snmp-server community public RO
+      render: text
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any other information that might be helpful
+      placeholder: "This was working on Zabbix 5.0 but broke after upgrading to 6.4..."
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      description: Please confirm you've done the following
+      options:
+        - label: I have searched existing issues and this is not a duplicate
+          required: true
+        - label: I have tested with the latest version from the main branch
+          required: true
+        - label: I have reviewed the template/script README (if available)
+          required: true
+        - label: I have tested SNMP access manually (for SNMP templates)
+          required: false
+        - label: I have checked Zabbix server logs for errors
+          required: false
