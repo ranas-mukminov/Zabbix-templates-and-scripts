@@ -1,0 +1,154 @@
+name: Feature Request / New Template
+description: Request a new template or feature
+title: "[FEATURE] "
+labels: ["enhancement"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a new feature or template! Please provide as much detail as possible.
+
+  - type: dropdown
+    id: request-type
+    attributes:
+      label: Request Type
+      description: What kind of request is this?
+      options:
+        - New template for a device/vendor
+        - New external script
+        - Enhancement to existing template
+        - Enhancement to existing script
+        - Documentation improvement
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: device-vendor
+    attributes:
+      label: Device/Vendor/Technology
+      description: What device, vendor, or technology should this support?
+      placeholder: "e.g., Juniper EX Series, HPE ProLiant, PostgreSQL database"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Describe the feature or template you'd like
+      placeholder: |
+        I would like a template for monitoring Juniper EX series switches via SNMP.
+        The template should include:
+        - Interface discovery and statistics
+        - Environmental sensors (temperature, fans)
+        - Chassis/module inventory
+        - VLAN information
+    validations:
+      required: true
+
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use Case
+      description: Why is this useful? What problem does it solve?
+      placeholder: |
+        We have 50+ Juniper EX switches in our network and currently have no monitoring.
+        This template would help us monitor link status, detect hardware failures, and track bandwidth usage.
+    validations:
+      required: true
+
+  - type: textarea
+    id: existing-resources
+    attributes:
+      label: Existing Resources
+      description: Links to vendor documentation, MIBs, or existing community templates
+      placeholder: |
+        Official Juniper MIB files: https://www.juniper.net/documentation/...
+        SNMP OID reference: https://oidref.com/1.3.6.1.4.1.2636
+        Existing template (outdated): https://github.com/...
+      render: markdown
+
+  - type: input
+    id: tested-versions
+    attributes:
+      label: Device/Software Versions
+      description: What versions should this support?
+      placeholder: "e.g., Junos OS 18.x - 21.x, HPE iLO 4/5"
+
+  - type: dropdown
+    id: monitoring-method
+    attributes:
+      label: Monitoring Method
+      description: How should this template collect data?
+      options:
+        - SNMP (v2c)
+        - SNMP (v3)
+        - Zabbix Agent
+        - External Script
+        - HTTP Agent / API
+        - IPMI
+        - JMX
+        - Not sure / multiple methods
+      multiple: true
+
+  - type: textarea
+    id: metrics
+    attributes:
+      label: Desired Metrics
+      description: What specific metrics should be monitored?
+      placeholder: |
+        - Interface status (up/down)
+        - Interface traffic (in/out bps, pps)
+        - Interface errors and discards
+        - CPU usage (1min, 5min, 15min)
+        - Memory usage
+        - Temperature sensors
+        - Fan status
+        - Power supply status
+        - BGP neighbor status (if applicable)
+
+  - type: textarea
+    id: triggers
+    attributes:
+      label: Desired Triggers/Alerts
+      description: What alerts should be configured?
+      placeholder: |
+        - Interface down (High severity)
+        - High CPU usage > 80% (Warning)
+        - High memory usage > 90% (Warning)
+        - Temperature > 75°C (High)
+        - Fan failure (High)
+        - Power supply failure (Disaster)
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      description: Are you willing to contribute?
+      options:
+        - label: I can provide sample device access for testing (via VPN or lab)
+        - label: I can test the template once developed
+        - label: I can contribute MIB files or documentation
+        - label: I can develop this template myself and submit a PR
+        - label: I need professional help (willing to pay for development)
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any other information
+      placeholder: "We're migrating from Nagios and need this template to complete the migration..."
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      options:
+        - label: I have searched existing issues and templates
+          required: true
+        - label: This is not already covered by an existing template
+          required: true
+        - label: I have checked the vendor's documentation for SNMP/API support
+          required: false
